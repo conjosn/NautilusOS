@@ -1,8 +1,9 @@
 
 ### `WE NEED TO SEEK FUNDING FOR DOMAIN! SEE DOMAIN IDEAS FOR MORE DETAILS`
-## NautilusOS
+## NautilusOS + Nova AI
 
 NautilusOS is a web-based operating system built entirely in HTML, CSS, and JS.
+This hybrid version blends NautilusOS with Nova AI's local assistant experience, adding a Nova AI Command Center for smarter navigation, system automation, reminders, and profile-aware AI support.
 Boot it up, log in, and mess around like it’s a real desktop with proxies, games, apps, an app store, windows, a file explorer, taskbar, and more.
 
 NAUTILUS BLOCKED BY YOUR SCHOOL?? DOWNLOAD "index.html" from the NautilusOS-OneFile folder! Open up index.html and you'll have (most*) of Nautilus's features!

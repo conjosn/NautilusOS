@@ -1019,7 +1019,7 @@ const appMetadata = {
     preinstalled: true,
   },
   "nautilus-ai": {
-    name: "Nautilus AI Assistant",
+    name: "Nova AI Command Center",
     icon: "fa-robot",
     preinstalled: true,
   },
@@ -5152,8 +5152,8 @@ alt="favicon">
         </div>
     </div>
     <div class="carousel-content">
-        <h2>Nautilus AI Assistant</h2>
-        <p>Meet your new intelligent companion! The Nautilus AI Assistant helps you with tasks, answers questions, and makes your NautilusOS experience smarter. Powered by advanced AI technology right in your browser.</p>
+        <h2>Nova AI Command Center</h2>
+        <p>Meet your new intelligent companion! The Nova AI Command Center helps you with tasks, answers questions, and makes your NautilusOS experience smarter. Powered by advanced AI technology right in your browser.</p>
     </div>
 </div>
 
@@ -6094,7 +6094,7 @@ print(f'Sum: {sum(numbers)}')
       height: 600,
     },
     "nautilus-ai": {
-      title: "Nautilus AI Assistant",
+      title: "Nova AI Command Center",
       icon: "fas fa-robot",
       content: `
         <div id="nautilusAiContainer" style="display: flex; flex-direction: column; height: 100%; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
@@ -6102,7 +6102,7 @@ print(f'Sum: {sum(numbers)}')
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
               <i class="fas fa-robot" style="color: var(--accent); font-size: 24px;"></i>
               <div>
-                <h2 style="color: var(--accent); margin: 0; font-size: 18px;">Nautilus AI Assistant</h2>
+                <h2 style="color: var(--accent); margin: 0; font-size: 18px;">Nova AI Command Center</h2>
                 <div style="color: #94a3b8; font-size: 11px; margin-top: 2px;">by lanefiedler-731 | Powered by WebLLM</div>
               </div>
             </div>
@@ -6119,17 +6119,36 @@ print(f'Sum: {sum(numbers)}')
                   <i class="fas fa-robot" style="color: var(--accent);"></i>
                   <span>Model:</span>
                   <select id="aiModelSelect" onchange="switchAIModel(this.value)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(125, 211, 192, 0.3); border-radius: 4px; padding: 4px 8px; color: var(--accent); cursor: pointer; font-size: 11px;">
-                    <option value="fast" selected><i class="fas fa-bolt"></i> Dumb Fast</option>
-                    <option value="smart"><i class="fa-solid fa-brain"></i> Smart Slow</option>
+                    <option value="fast">Dumb Fast</option>
+                    <option value="smart">Smart Slow</option>
                   </select>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <i class="fas fa-microchip" style="color: var(--accent);"></i>
-                  <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                    <input type="checkbox" id="aiWebGPUToggle" checked style="cursor: pointer;">
-                    <span>WebGPU</span>
-                  </label>
+                  <i class="fas fa-layer-group" style="color: var(--accent);"></i>
+                  <span>Mode:</span>
+                  <select id="aiModeSelect" onchange="switchAIMode(this.value)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(125, 211, 192, 0.3); border-radius: 4px; padding: 4px 8px; color: var(--accent); cursor: pointer; font-size: 11px;">
+                    <option value="smart">Smart</option>
+                    <option value="controlled">Controlled</option>
+                    <option value="chat">Chat</option>
+                  </select>
                 </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i class="fas fa-user-astronaut" style="color: var(--accent);"></i>
+                  <span>Profile:</span>
+                  <select id="aiProfileSelect" onchange="switchAIProfile(this.value)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(125, 211, 192, 0.3); border-radius: 4px; padding: 4px 8px; color: var(--accent); cursor: pointer; font-size: 11px;">
+                    <option value="general">General</option>
+                    <option value="analyst">Analyst</option>
+                    <option value="engineer">Engineer</option>
+                    <option value="operator">Operator</option>
+                  </select>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-cogs" style="color: var(--accent);"></i>
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" id="aiWebGPUToggle" checked style="cursor: pointer;">
+                  <span>WebGPU</span>
+                </label>
               </div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-cogs" style="color: var(--accent);"></i>
@@ -6139,16 +6158,17 @@ print(f'Sum: {sum(numbers)}')
                 </label>
               </div>
             </div>
+            <div id="aiTelemetry" style="margin-top: 10px;"></div>
           </div>
           
           <div id="aiChatMessages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
             <div style="background: rgba(125, 211, 192, 0.1); border: 1px solid rgba(125, 211, 192, 0.3); border-radius: 10px; padding: 15px;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                 <i class="fas fa-robot" style="color: var(--accent); font-size: 18px;"></i>
-                <strong style="color: var(--accent);">Nautilus AI</strong>
+                <strong style="color: var(--accent);">Nova AI</strong>
               </div>
               <div style="color: #cbd5e1; line-height: 1.6;">
-                Hello! I'm your Nautilus AI Assistant. I can help you understand and navigate NautilusOS.<br><br>
+                Hello! I'm your Nova AI Command Center. I can help you understand and navigate NautilusOS.<br><br>
                 <strong style="color: var(--accent);"><i class="fas fa-brain"></i> Model: Smarty (Qwen3-0.6B)</strong><br>
                 Advanced reasoning with thinking mode enabled. Switch models in the dropdown if needed.<br><br>
                 <strong style="color: var(--accent);"><i class="fa-solid fa-robot"></i> OS Automation Enabled!</strong><br>
@@ -7223,7 +7243,7 @@ const APP_NAMES = {
   achievements: "Achievements",
   browser: "Nautilus Browser",
   "ai-snake": "AI Snake Learning",
-  "nautilus-ai": "Nautilus AI Assistant",
+  "nautilus-ai": "Nova AI Command Center",
   python: "Python Interpreter",
   "web-app-creator": "Web App Creator",
   about: "About NautilusOS"
@@ -7818,10 +7838,10 @@ function switchAppStoreSection(section, element) {
         type: "app"
       },
       {
-        name: "Nautilus AI Assistant",
+        name: "Nova AI Command Center",
         author: "lanefiedler-731",
-        desc: "Your personal AI assistant powered by WebLLM. Get instant help with NautilusOS features, apps, settings, and more. Runs entirely in your browser with no server required!",
-        customPreviewHtml: `<div class="illustration-nautilus-ai"> <div class="illustration-nautilus-ai-header"> <div class="illustration-nautilus-ai-icon"><i class="fas fa-robot"></i></div> <div class="illustration-nautilus-ai-title">Nautilus AI</div> </div> <div class="illustration-nautilus-ai-content"> <div class="illustration-nautilus-ai-msg-ai"> <div class="illustration-nautilus-ai-line" style="width: 90%;"></div> <div class="illustration-nautilus-ai-line" style="width: 60%;"></div> </div> <div class="illustration-nautilus-ai-msg-user"> <div class="illustration-nautilus-ai-line" style="width: 80%;"></div> </div> </div> </div>`,
+        desc: "A hybrid local AI command center for NautilusOS. Ask questions, manage apps, control settings, and set reminders with a safe approval workflow.",
+        customPreviewHtml: `<div class="illustration-nautilus-ai"> <div class="illustration-nautilus-ai-header"> <div class="illustration-nautilus-ai-icon"><i class="fas fa-robot"></i></div> <div class="illustration-nautilus-ai-title">Nova AI</div> </div> <div class="illustration-nautilus-ai-content"> <div class="illustration-nautilus-ai-msg-ai"> <div class="illustration-nautilus-ai-line" style="width: 90%;"></div> <div class="illustration-nautilus-ai-line" style="width: 60%;"></div> </div> <div class="illustration-nautilus-ai-msg-user"> <div class="illustration-nautilus-ai-line" style="width: 80%;"></div> </div> </div> </div>`,
         isInstalled: true,
         installButtonText: "Open",
         installAction: "openApp('nautilus-ai')",
@@ -10914,7 +10934,7 @@ function addDesktopIcon(appName) {
   } else if (appName === "ai-snake") {
     iconConfig = { icon: "fa-brain", label: "AI Snake Learning" };
   } else if (appName === "nautilus-ai") {
-    iconConfig = { icon: "fa-robot", label: "Nautilus AI Assistant" };
+    iconConfig = { icon: "fa-robot", label: "Nova AI Command Center" };
   } else {
     // Try to get from appMetadata
     const metadata = appMetadata[appName];
@@ -13407,7 +13427,7 @@ function expandHelpTopic(topicId) {
                     <li><strong>Cloaking</strong> - Disguise your browser tab</li>
                     <li><strong>What's New</strong> - View latest features and updates</li>
                     <li><strong>AI Snake Learning</strong> - Watch AI learn to play Snake</li>
-                    <li><strong>Nautilus AI Assistant</strong> - Get help from an AI assistant</li>
+                    <li><strong>Nova AI Command Center</strong> - Get help from an AI assistant</li>
                     <li><strong>Web App Creator</strong> - Create and customize web applications</li>
                     <li><strong>Help</strong> - System help and documentation</li>
                 </ul>
@@ -15993,7 +16013,11 @@ let nautilusAI = {
   pendingTools: [],
   toolsEnabled: true,
   actionLog: [],
-  currentModel: 'smart' // 'fast' or 'smart' - default to smart (Qwen3 with thinking)
+  currentModel: 'smart', // 'fast' or 'smart' - default to smart (Qwen3 with thinking)
+  mode: localStorage.getItem('nautilusOS_aiMode') || 'smart',
+  profile: localStorage.getItem('nautilusOS_aiProfile') || 'general',
+  reminders: [],
+  lastReminderCheck: 0,
 };
 
 const AI_MODELS = {
@@ -16009,6 +16033,25 @@ const AI_MODELS = {
     description: 'Advanced reasoning with thinking mode',
     icon: 'fa-brain'
   }
+};
+
+const AI_PROFILES = {
+  general: {
+    label: 'General',
+    description: 'Friendly and helpful. Ideal for everyday questions and guidance.',
+  },
+  analyst: {
+    label: 'Analyst',
+    description: 'Detailed and analytical. Best for research, comparison, and analysis.',
+  },
+  engineer: {
+    label: 'Engineer',
+    description: 'Practical and solution-oriented. Great for troubleshooting and technical tasks.',
+  },
+  operator: {
+    label: 'Operator',
+    description: 'Action-focused and efficient. Best for system control and execution.',
+  },
 };
 
 // OS Automation Tools - Available for AI to control the OS
@@ -16118,7 +16161,186 @@ const OS_AUTOMATION_TOOLS = {
   }
 };
 
-const NAUTILUS_SYSTEM_PROMPT = `You are the Nautilus AI Assistant, an expert guide for NautilusOS - a web-based operating system built entirely in HTML, CSS, and JavaScript.
+function loadAiReminders() {
+  const raw = localStorage.getItem('nautilusOS_aiReminders');
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error('Failed to parse AI reminders:', e);
+    return [];
+  }
+}
+
+function saveAiReminders() {
+  try {
+    localStorage.setItem('nautilusOS_aiReminders', JSON.stringify(nautilusAI.reminders));
+  } catch (e) {
+    console.error('Failed to save AI reminders:', e);
+  }
+}
+
+function formatAiRelativeTime(timestamp) {
+  const deltaSeconds = Math.max(0, Math.round((timestamp - Date.now()) / 1000));
+  if (deltaSeconds < 60) {
+    return `${deltaSeconds} second${deltaSeconds === 1 ? '' : 's'}`;
+  }
+  const deltaMinutes = Math.round(deltaSeconds / 60);
+  if (deltaMinutes < 60) {
+    return `${deltaMinutes} minute${deltaMinutes === 1 ? '' : 's'}`;
+  }
+  const deltaHours = Math.round(deltaMinutes / 60);
+  return `${deltaHours} hour${deltaHours === 1 ? '' : 's'}`;
+}
+
+function getAiSystemStatus() {
+  const platform = navigator.platform || 'Unknown';
+  const language = navigator.language || 'Unknown';
+  const cores = navigator.hardwareConcurrency || 'Unknown';
+  const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown';
+  const screenSize = `${screen.width}x${screen.height}`;
+  const openWindows = Object.keys(window.windows || {}).length;
+  const profile = AI_PROFILES[nautilusAI.profile] || AI_PROFILES.general;
+
+  return `System status:\n- Platform: ${platform}\n- Language: ${language}\n- CPU cores: ${cores}\n- Device memory: ${memory}\n- Screen: ${screenSize}\n- LocalStorage entries: ${localStorage.length}\n- Open windows: ${openWindows}\n- AI mode: ${nautilusAI.mode}\n- Agent profile: ${profile.label}\n- Automation: ${nautilusAI.toolsEnabled ? 'Enabled' : 'Disabled'}`;
+}
+
+function checkAiReminders() {
+  const now = Date.now();
+  const dueReminders = nautilusAI.reminders.filter((reminder) => reminder.due <= now);
+  if (!dueReminders.length) return;
+
+  nautilusAI.reminders = nautilusAI.reminders.filter((reminder) => reminder.due > now);
+  saveAiReminders();
+
+  dueReminders.forEach((reminder) => {
+    const message = `Reminder: ${reminder.text}`;
+    showToast(message, 'fa-bell');
+    addAiChatMessage(message, false);
+  });
+}
+
+function getNautilusSystemPrompt() {
+  const profile = AI_PROFILES[nautilusAI.profile] || AI_PROFILES.general;
+  return `Active agent profile: ${profile.label} - ${profile.description}\nActive execution mode: ${nautilusAI.mode}\n\n${NAUTILUS_SYSTEM_PROMPT}`;
+}
+
+function tryHandleAiLocalCommand(userMessage) {
+  const trimmed = userMessage.trim();
+  const lower = trimmed.toLowerCase();
+
+  if (!nautilusAI.reminders.length) {
+    nautilusAI.reminders = loadAiReminders();
+  }
+
+  const reminderMatch = trimmed.match(/^\/?remind(?: me)? in (\d+)\s*(seconds?|minutes?|hours?)\s*(?:to\s*)?(.+)$/i);
+  if (reminderMatch) {
+    const amount = Number(reminderMatch[1]);
+    const unit = reminderMatch[2].toLowerCase();
+    const task = reminderMatch[3].trim();
+    if (!task) {
+      return { text: 'Please tell me what to remind you about.', status: 'Reminder failed' };
+    }
+    const multiplier = unit.startsWith('hour') ? 3600 : unit.startsWith('minute') ? 60 : 1;
+    const due = Date.now() + amount * multiplier * 1000;
+    const reminder = { id: `${Date.now()}`, due, text: task };
+    nautilusAI.reminders.push(reminder);
+    saveAiReminders();
+    const time = formatAiRelativeTime(due);
+    return { text: `Reminder set for ${time}: "${task}".`, status: 'Reminder scheduled' };
+  }
+
+  if (/^\/?help$|^help( me)?$/i.test(trimmed) || /what can you do/i.test(lower)) {
+    return {
+      text: `Local assistant commands:\n- /help → Show this message\n- /status → Show system status\n- /time → Show current time and date\n- /models → List available local AI models\n- /reminders → Show pending reminders\n- /clear → Clear the chat\n- /apps → List available installed apps\n- /files → List files in the root directory\n- /remind me in 10 minutes to ... → Set a reminder`,
+      status: 'Local help delivered',
+    };
+  }
+
+  if (/^\/?status$|system status|system health|status report/i.test(lower)) {
+    return { text: getAiSystemStatus(), status: 'System status delivered' };
+  }
+
+  if (/^\/?time$|what time|current time|today['’]?s date/i.test(lower)) {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+    const formattedDate = now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    return { text: `It is ${formattedTime} on ${formattedDate}.`, status: 'Time delivered' };
+  }
+
+  if (/^\/?models$|list models|installed models|model status/i.test(lower)) {
+    const modelList = Object.entries(AI_MODELS)
+      .map(([key, model]) => `- ${model.label} (${key}): ${model.description}`)
+      .join('\n');
+    return { text: `Available local models:\n${modelList}`, status: 'Model list delivered' };
+  }
+
+  if (/^\/?reminders$|pending reminders|list reminders/i.test(lower)) {
+    if (!nautilusAI.reminders.length) {
+      return { text: 'No reminders are currently scheduled.', status: 'No reminders' };
+    }
+    const remindersText = nautilusAI.reminders
+      .map((reminder) => `- ${reminder.text} in ${formatAiRelativeTime(reminder.due)}`)
+      .join('\n');
+    return { text: `Pending reminders:\n${remindersText}`, status: 'Reminders listed' };
+  }
+
+  if (/^\/?clear$|^clear conversation$|^new conversation$/i.test(lower)) {
+    clearAiChat();
+    return { text: 'Conversation cleared. Ready for a fresh session.', shouldClear: true, status: 'Chat cleared' };
+  }
+
+  if (/^\/?apps$|what apps|available apps/i.test(lower)) {
+    const appNames = Object.keys(appMetadata)
+      .filter((id) => !id.startsWith('webapp_'))
+      .map((id) => appMetadata[id]?.name || id);
+    return { text: `Installed NautilusOS apps:\n- ${appNames.join('\n- ')}`, status: 'App list delivered' };
+  }
+
+  if (/^\/?files$|list files|show files|root files/i.test(lower)) {
+    const root = getFileSystemAtPath([]);
+    const fileNames = root ? Object.keys(root).sort() : [];
+    return { text: fileNames.length ? `Root files and folders:\n- ${fileNames.join('\n- ')}` : 'No files found in the root directory.', status: 'File list delivered' };
+  }
+
+  return null;
+}
+
+function switchAIMode(mode) {
+  if (!['smart', 'controlled', 'chat'].includes(mode)) return;
+  nautilusAI.mode = mode;
+  localStorage.setItem('nautilusOS_aiMode', mode);
+  showToast(`AI mode set to ${mode}`, 'fa-robot');
+  updateAiStatus(`Mode: ${mode}`, false);
+  updateAiTelemetry();
+}
+
+function switchAIProfile(profileKey) {
+  if (!AI_PROFILES[profileKey]) return;
+  nautilusAI.profile = profileKey;
+  localStorage.setItem('nautilusOS_aiProfile', profileKey);
+  showToast(`Agent profile set to ${AI_PROFILES[profileKey].label}`, 'fa-user');
+  updateAiStatus(`Profile: ${AI_PROFILES[profileKey].label}`, false);
+  updateAiTelemetry();
+}
+
+function updateAiTelemetry() {
+  const telemetryEl = document.getElementById('aiTelemetry');
+  if (!telemetryEl) return;
+  const profile = AI_PROFILES[nautilusAI.profile] || AI_PROFILES.general;
+  const openWindows = Object.keys(window.windows || {}).length;
+  telemetryEl.innerHTML = `
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; color: #94a3b8;">
+      <span><strong style="color: var(--accent);">Mode:</strong> ${nautilusAI.mode}</span>
+      <span><strong style="color: var(--accent);">Profile:</strong> ${profile.label}</span>
+      <span><strong style="color: var(--accent);">Automation:</strong> ${nautilusAI.toolsEnabled ? 'Enabled' : 'Disabled'}</span>
+      <span><strong style="color: var(--accent);">Open windows:</strong> ${openWindows}</span>
+      <span><strong style="color: var(--accent);">Reminders:</strong> ${nautilusAI.reminders.length}</span>
+    </div>
+  `;
+}
+
+const NAUTILUS_SYSTEM_PROMPT = `You are the Nova AI Assistant, an expert guide for NautilusOS - a web-based operating system built entirely in HTML, CSS, and JavaScript.
 
 <i class="fa-solid fa-robot"></i> OS AUTOMATION CAPABILITIES:
 You have the ability to control and automate NautilusOS! You can execute actions on behalf of the user with their approval.
@@ -16263,7 +16485,7 @@ AVAILABLE APPLICATIONS:
 16. Startup Apps - Configure apps to launch on boot
 17. V86 Emulator - Run actual operating systems in the browser
 18. AI Snake Learning - Neural network that learns to play Snake (by lanefiedler-731)
-19. Nautilus AI Assistant - That's me! Your helpful AI guide (by lanefiedler-731)
+19. Nova AI Command Center - That's me! Your helpful AI guide (by lanefiedler-731)
 
 WINDOW MANAGEMENT:
 - Fully draggable windows with title bar drag
@@ -16384,7 +16606,7 @@ DEVELOPER INFO:
 - Open source on GitHub
 - No external frameworks (vanilla JS)
 - Community contributions welcome
-- Apps can be created by community (Nautilus AI Assistant by lanefiedler-731)
+- Apps can be created by community (Nova AI Command Center by lanefiedler-731)
 
 THINKING MODE (QWEN3 CAPABILITY):
 You have advanced reasoning capabilities! For complex tasks, you can use thinking mode to show your reasoning process:
@@ -16424,7 +16646,11 @@ async function initializeNautilusAI(modelKey = null) {
   // Allow re-initialization with different model
   const isModelSwitch = nautilusAI.isInitialized && modelKey !== null;
 
-  if (nautilusAI.isInitialized && !isModelSwitch) return;
+  if (nautilusAI.isInitialized && !isModelSwitch) {
+    updateAiTelemetry();
+    checkAiReminders();
+    return;
+  }
 
   nautilusAI.isInitializing = true;
   const statusEl = document.getElementById('aiStatus');
@@ -16504,13 +16730,13 @@ async function initializeNautilusAI(modelKey = null) {
       // Keep conversation history when switching models
       const oldMessages = nautilusAI.messages.filter(m => m.role !== 'system');
       nautilusAI.messages = [
-        { role: "system", content: NAUTILUS_SYSTEM_PROMPT },
+        { role: "system", content: getNautilusSystemPrompt() },
         ...oldMessages
       ];
     } else {
       // Fresh start
       nautilusAI.messages = [
-        { role: "system", content: NAUTILUS_SYSTEM_PROMPT }
+        { role: "system", content: getNautilusSystemPrompt() }
       ];
     }
 
@@ -16518,6 +16744,17 @@ async function initializeNautilusAI(modelKey = null) {
     nautilusAI.isInitialized = true;
     nautilusAI.isInitializing = false;
     updateAiStatus(`${modelConfig.label} Ready`, false);
+    if (document.getElementById('aiModeSelect')) {
+      document.getElementById('aiModeSelect').value = nautilusAI.mode;
+    }
+    if (document.getElementById('aiProfileSelect')) {
+      document.getElementById('aiProfileSelect').value = nautilusAI.profile;
+    }
+    if (document.getElementById('aiModelSelect')) {
+      document.getElementById('aiModelSelect').value = nautilusAI.currentModel;
+    }
+    updateAiTelemetry();
+    checkAiReminders();
 
     if (sendBtn) sendBtn.disabled = false;
     if (inputEl) {
@@ -16532,7 +16769,7 @@ async function initializeNautilusAI(modelKey = null) {
     }
 
   } catch (error) {
-    console.error('Failed to initialize Nautilus AI:', error);
+    console.error('Failed to initialize Nova AI:', error);
     nautilusAI.isInitializing = false;
     updateAiStatus(`Error: ${error.message}`, false, true);
     showToast('Failed to load AI model. Check console for details.', 'fa-exclamation-triangle');
@@ -16592,6 +16829,16 @@ async function sendAiMessage() {
   const userMessage = inputEl.value.trim();
   if (!userMessage) return;
 
+  const localResponse = tryHandleAiLocalCommand(userMessage);
+  if (localResponse) {
+    if (localResponse.shouldClear) {
+      clearAiChat();
+    }
+    addAiChatMessage(localResponse.text, false);
+    updateAiStatus(localResponse.status || 'Local command handled', false);
+    return;
+  }
+
   if (!nautilusAI.isInitialized) {
     await initializeNautilusAI();
     if (!nautilusAI.isInitialized) return;
@@ -16632,7 +16879,7 @@ async function sendAiMessage() {
     headerDiv.style.cssText = 'display: flex; align-items: center; gap: 8px; margin-bottom: 8px;';
     headerDiv.innerHTML = `
       <i class="fas fa-robot" style="color: var(--accent); font-size: 18px;"></i>
-      <strong style="color: var(--accent);">Nautilus AI</strong>
+      <strong style="color: var(--accent);">Nova AI</strong>
     `;
 
     const contentDiv = document.createElement('div');
@@ -16846,7 +17093,7 @@ function addAiChatMessage(message, isUser = false, isError = false) {
   headerDiv.style.cssText = 'display: flex; align-items: center; gap: 8px; margin-bottom: 8px;';
   headerDiv.innerHTML = `
     <i class="fas ${isUser ? 'fa-user' : 'fa-robot'}" style="color: ${isUser ? 'var(--accent)' : (isError ? '#ef4444' : 'var(--accent)')}; font-size: 18px;"></i>
-    <strong style="color: ${isUser ? 'var(--accent)' : (isError ? '#ef4444' : 'var(--accent)')}">${isUser ? 'You' : 'Nautilus AI'}</strong>
+    <strong style="color: ${isUser ? 'var(--accent)' : (isError ? '#ef4444' : 'var(--accent)')}">${isUser ? 'You' : 'Nova AI'}</strong>
   `;
 
   const contentDiv = document.createElement('div');
@@ -16879,23 +17126,25 @@ function clearAiChat() {
     <div style="background: rgba(125, 211, 192, 0.1); border: 1px solid rgba(125, 211, 192, 0.3); border-radius: 10px; padding: 15px;">
       <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
         <i class="fas fa-robot" style="color: var(--accent); font-size: 18px;"></i>
-        <strong style="color: var(--accent);">Nautilus AI</strong>
+        <strong style="color: var(--accent);">Nova AI</strong>
       </div>
       <div style="color: #cbd5e1; line-height: 1.6;">
-        Hello! I'm your Nautilus AI Assistant. I can help you understand and navigate NautilusOS.<br><br>
+        Hello! I'm the Nova AI Command Center, a hybrid assistant built into NautilusOS. I can help you explore apps, manage files, change settings, and automate tasks with safe approval.<br><br>
         <strong style="color: var(--accent);"><i class="fas ${currentModelConfig.icon}"></i> Using: ${currentModelConfig.label}</strong> - ${currentModelConfig.description}<br><br>
+        <strong style="color: var(--accent);"><i class="fa-solid fa-shield-alt"></i>&nbsp;Mode-aware Assistant</strong><br>
+        Use Smart, Controlled, or Chat modes to control how I respond and execute actions.<br><br>
         <strong style="color: var(--accent);"><i class="fa-solid fa-robot"></i>&nbsp;OS Automation Enabled!</strong><br>
-        I can control NautilusOS for you! Just ask me to do something and I'll request your approval before taking action.<br><br>
+        I can request approval to open apps, run terminal commands, manage files, change settings, and more.<br><br>
         <strong style="color: var(--accent);"><i class="fa-solid fa-cloud"></i> Thinking Mode Active!</strong><br>
-        I can show my reasoning process for complex tasks. Watch for the collapsible "Thinking" section!<br><br>
-        Try: "Open calculator" or "List available themes"
+        For complex tasks, I'll show my reasoning process in a collapsible "Thinking" section.<br><br>
+        Try: "Open calculator" or "Set a reminder for 10 minutes"
       </div>
     </div>
   `;
 
   // Reset conversation history (keep system prompt)
   nautilusAI.messages = [
-    { role: "system", content: NAUTILUS_SYSTEM_PROMPT }
+    { role: "system", content: getNautilusSystemPrompt() }
   ];
 
   showToast('Chat cleared', 'fa-trash');
